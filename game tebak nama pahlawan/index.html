@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tebak Nama Pahlawan Indonesia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #game-container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Tebak Nama Pahlawan Indonesia</h1>
+        <p>Silakan tebak nama pahlawan berdasarkan petunjuk berikut:</p>
+        <div id="question-container"></div>
+        <input type="text" id="answer" placeholder="Masukkan jawaban di sini">
+        <button onclick="checkAnswer()">Cek Jawaban</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "Pahlawan Nasional yang dikenal sebagai Bapak Proklamator", answer: "Soekarno" },
+            { question: "Pahlawan Nasional yang dikenal sebagai Bapak Kemerdekaan", answer: "Mohammad Hatta" },
+            { question: "Pahlawan Nasional yang berjasa dalam kemandirian Irian Barat", answer: "Douwes Dekker" },
+            // Tambahkan lebih banyak pertanyaan di sini
+        ];
+
+        let currentQuestionIndex = 0;
+        const questionContainer = document.getElementById('question-container');
+        const answerInput = document.getElementById('answer');
+        const resultParagraph = document.getElementById('result');
+
+        function displayQuestion() {
+            questionContainer.textContent = questions[currentQuestionIndex].question;
+            answerInput.value = '';
+            resultParagraph.textContent = '';
+        }
+
+        function checkAnswer() {
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            const correctAnswer = questions[currentQuestionIndex].answer.toLowerCase();
+
+            if (userAnswer === correctAnswer) {
+                resultParagraph.textContent = 'Jawaban benar!';
+            } else {
+                resultParagraph.textContent = 'Jawaban salah. Coba lagi!';
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(displayQuestion, 1000);
+            } else {
+                questionContainer.textContent = 'Game selesai. Terima kasih!';
+                answerInput.style.display = 'none';
+            }
+        }
+
+        displayQuestion();
+    </script>
+</body>
+</html>
